@@ -104,11 +104,8 @@ body {
 }
 
 #brackets-svg {
-    position: absolute;
     width: 293px;
     height: 293px;
-    top: 0;
-    left: 0;
     z-index: 5;
 }
 
