@@ -4,17 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const captureButton = document.getElementById('capture-button');
     const fileInput = document.getElementById('file-input');
     const photoCanvas = document.getElementById('photo-canvas');
-    const galleryButton = document.querySelector('.bottom-icon:first-child'); // Левая иконка для галереи
+    // Левая иконка для галереи
+    const galleryButton = document.querySelector('.bottom-icon:first-child'); 
 
     let currentStream = null;
 
     // --- ФУНКЦИЯ 1: ЗАПУСК КАМЕРЫ ---
     function startCamera() {
-        // Скрываем изображение, показываем видео
         displayImage.style.display = 'none';
         video.style.display = 'block';
 
-        // Также показываем оверлей, если он был скрыт
+        // Показываем оверлей
         document.getElementById('overlay-text').style.display = 'flex'; 
 
         if (currentStream) {
@@ -33,9 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(err => {
             console.error("Ошибка доступа к камере:", err);
             alert("Не удалось получить доступ к камере. Убедитесь, что вы используете HTTPS.");
-            // Если камера недоступна, возможно, стоит показать только галерею или заглушку
-            document.getElementById('overlay-text').innerHTML = "Камера недоступна.";
-            document.getElementById('overlay-text').style.fontSize = '1.5em';
         });
     }
 
@@ -66,9 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- ФУНКЦИЯ 3: ВЫБОР ИЗОБРАЖЕНИЯ ИЗ ГАЛЕРЕИ ---
-    // Теперь активация fileInput привязана к левой иконке
+    // Активация fileInput привязана к левой иконке
     galleryButton.addEventListener('click', () => {
-        fileInput.click(); // Программно кликаем по скрытому input type="file"
+        fileInput.click(); 
     });
 
     fileInput.addEventListener('change', (event) => {
@@ -91,6 +88,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Запускаем камеру при загрузке страницы
     startCamera();
 });
