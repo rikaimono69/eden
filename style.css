@@ -323,6 +323,9 @@ body {
     border-color: #333; /* Темная обводка */
     color: #333; /* Темный текст */
 }
+.grade-neutural #result-text{
+    color: #333;
+}
 .grade-neutral #reset-button:active {
     background-color: white;
     /* Устанавливаем цвет текста в цвет самого градиента (оранжевый) */
