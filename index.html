@@ -21,6 +21,11 @@
         <img id="display-image" style="display: none;" alt="Сделанный снимок или выбранное изображение">
         <canvas id="photo-canvas" style="display: none;"></canvas>
 
+        <div id="view-container">
+        <video id="camera-stream" autoplay playsinline></video>
+        <img id="display-image" style="display: none;" alt="Сделанный снимок или выбранное изображение">
+        <canvas id="photo-canvas" style="display: none;"></canvas>
+
         <div id="overlay-text">
             <img src="subtract.svg" id="brackets-svg" alt="Рамки">
             <div id="overlay-label">
@@ -44,6 +49,13 @@
             <img src="flash.svg" alt="Flash icon">
         </div>
         
+    </div>
+    
+    <div id="result-panel" class="hidden">
+        <div id="result-text"></div>
+        <button id="reset-button">
+            Еще фото
+        </button>
     </div>
     
     <script src="script.js"></script>
