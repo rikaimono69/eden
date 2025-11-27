@@ -1,0 +1,77 @@
+/* Сброс стилей и полноэкранный режим */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Скрываем полосы прокрутки */
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Черный фон */
+}
+
+/* Контейнер для видео/изображения */
+#view-container {
+    flex-grow: 1; /* Занимает все доступное пространство */
+    position: relative;
+}
+
+/* Стиль для видео-потока и отображаемого изображения */
+#camera-stream, #display-image {
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover растягивает видео/изображение, 
+       чтобы заполнить весь экран без черных полос */
+    object-fit: cover; 
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Панель управления (внизу) */
+#controls-panel {
+    width: 100%;
+    height: 120px; /* Высота панели */
+    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон */
+    display: flex;
+    justify-content: space-around; /* Распределяем кнопки */
+    align-items: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    z-index: 10; /* Поверх всего */
+}
+
+/* Общий стиль для кнопок */
+.control-button {
+    border: none;
+    background: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+/* Стиль для основной кнопки съемки */
+#capture-button {
+    width: 80px;
+    height: 80px;
+    border: 5px solid white;
+    border-radius: 50%; /* Круглая форма */
+    background-color: #f00; /* Красный центр */
+    font-size: 0; /* Скрываем текст "Снять" */
+    position: relative;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    transition: background-color 0.1s;
+}
+
+#capture-button:active {
+    background-color: #c00;
+}
+
+/* Стиль для кнопки галереи */
+.gallery-icon {
+    font-size: 18px;
+    opacity: 0.8;
+}
