@@ -110,14 +110,18 @@ body {
 }
 
 #overlay-label {
-    text-align: center;
+    /* Добавляем или меняем */
+    position: absolute; /* Делаем его абсолютно позиционированным */
+    top: 50%;           /* Сдвиг на 50% вниз */
+    left: 50%;          /* Сдвиг на 50% вправо */
+    transform: translate(-50%, -50%); /* Обратный сдвиг на половину своего размера */
+    
+    /* Остальные стили из вашего кода */
+    text-align: center; 
     color: white; 
-    font-size: 24px; /* Текст 24px */
-    line-height: 1.2;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); 
-    z-index: 6; 
+    font-size: 24px; 
+    z-index: 6; /* Гарантирует, что текст будет поверх рамки (z-index: 5) */
 }
-
 
 /* --- НИЖНЯЯ ПАНЕЛЬ УПРАВЛЕНИЯ И ГРАДИЕНТ --- */
 #bottom-panel {
