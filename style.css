@@ -269,7 +269,7 @@ body {
     font-family: sans-serif; 
     font-size: 20px;
     font-weight: 600; 
-    color: white; 
+    color: white; /* Цвет по умолчанию (для зеленого и красного градиента) */
     text-align: center;
     width: 100%;
 }
@@ -298,34 +298,20 @@ body {
     background-color: white;
 }
 
-/* --- Стили Градиентов (Динамические классы) --- */
-
-/* Градиент: Яблоко Хорошее (зеленый) */
 .grade-good {
-    /* Верхний цвет 81A441 (16%), Средний 6A8A30 (62%), Нижний 5E7D27 (100%) */
     background: linear-gradient(22deg, #5E7D27 100%, #6A8A30 62%, #81A441 16%);
 }
 
 /* Градиент: Яблоко Плохое (красный) */
 .grade-bad {
-    /* Верхний цвет BF2929, Средний AD2222, Нижний 9F2222 */
     background: linear-gradient(22deg, #9F2222 100%, #AD2222 62%, #BF2929 16%);
 }
 
 /* Градиент: Не Яблоко (оранжевый) */
 .grade-neutral {
-    /* Верхний цвет FBAC67, Средний EEA552, Нижний EF9241 */
     background: linear-gradient(22deg, #EF9241 100%, #EEA552 62%, #FBAC67 16%);
 }
 
-/* Цвет текста кнопки для нейтрального состояния (оранжевый фон требует темного текста) */
-.grade-neutral #reset-button {
-    border-color: #333; /* Темная обводка */
-    color: #333; /* Темный текст */
-}
-.grade-neutural #result-text{
-    color: #333;
-}
 .grade-neutral #reset-button:active {
     background-color: white;
     /* Устанавливаем цвет текста в цвет самого градиента (оранжевый) */
