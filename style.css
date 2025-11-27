@@ -6,7 +6,7 @@
     font-style: normal;
 }
 
-/* ОБЩИЙ СБРОС И ОСНОВНОЙ МАКЕТ */
+/* --- ОБЩИЙ СБРОС И ОСНОВНОЙ МАКЕТ --- */
 body {
     margin: 0;
     padding: 0;
@@ -21,24 +21,29 @@ body {
     -webkit-tap-highlight-color: transparent; 
 }
 
-/* ВЕРХНЯЯ ПАНЕЛЬ */
+/* --- ВЕРХНЯЯ ПАНЕЛЬ И ГРАДИЕНТ --- */
 #top-bar {
     position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px; 
-    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0)); 
+    height: 120px; /* Увеличена высота для градиента */
+    
+    /* Верхний градиент: от 100% черного (опасити 14%) до 0% черного */
+    background: linear-gradient(
+        to bottom, 
+        rgba(0, 0, 0, 0.14) 0%, /* 14% опасити */
+        rgba(0, 0, 0, 0) 100%
+    );
+    
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 0 15px;
+    align-items: flex-start; /* Выравнивание по верхнему краю */
+    
+    /* Паддинг 30px по бокам и 30px сверху */
+    padding: 30px 30px 0 30px;
     box-sizing: border-box;
     z-index: 20; 
-    color: white;
-    font-size: 1.2em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 /* Стилизация SVG-иконок в верхнем меню */
@@ -53,14 +58,18 @@ body {
 .top-icon img {
     width: 28px;
     height: 28px;
-    filter: invert(1); 
+    /* Убираем filter: invert(1), так как все должно быть белым по умолчанию. 
+       Если SVG черные, используем filter: drop-shadow, чтобы окрасить в белый. */
+    filter: drop-shadow(0 0 0 white) invert(1) brightness(100); 
 }
 
 .app-title {
-    font-size: 1.8em; 
+    font-size: 48px; /* Заголовок 48px */
+    line-height: 1; /* Для точности размера */
+    margin-top: -10px; /* Корректировка вертикального положения, если нужно */
 }
 
-/* КОНТЕЙНЕР ДЛЯ ВИДЕО/ИЗОБРАЖЕНИЯ */
+/* --- КОНТЕЙНЕР ВИДЕО/ИЗОБРАЖЕНИЯ --- */
 #view-container {
     flex-grow: 1; 
     position: relative;
@@ -80,10 +89,10 @@ body {
     z-index: 1; 
 }
 
-/* ОВЕРЛЕЙ С ТЕКСТОМ И SVG-РАМКАМИ */
+/* --- ОВЕРЛЕЙ С ТЕКСТОМ И SVG-РАМКАМИ --- */
 #overlay-text {
     position: relative; 
-    width: 90vmin; /* Рамка занимает 90% от наименьшей стороны экрана */
+    width: 90vmin; 
     height: 90vmin;
     max-width: 500px;
     max-height: 500px;
@@ -100,89 +109,105 @@ body {
     top: 0;
     left: 0;
     z-index: 5;
-    filter: invert(1) opacity(0.7); /* Делаем SVG белым и полупрозрачным */
+    /* Убеждаемся, что SVG белый и полупрозрачный */
+    filter: drop-shadow(0 0 0 white) invert(1) brightness(100); 
+    opacity: 0.7; 
 }
 
 #overlay-label {
     text-align: center;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.3em;
+    color: white; /* Чисто белый текст */
+    font-size: 24px; /* Текст 24px */
     line-height: 1.2;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     z-index: 6; 
 }
 
 
-/* НИЖНЯЯ ПАНЕЛЬ УПРАВЛЕНИЯ */
+/* --- НИЖНЯЯ ПАНЕЛЬ УПРАВЛЕНИЯ И ГРАДИЕНТ --- */
 #bottom-panel {
     position: fixed; 
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 150px; 
-    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0)); 
+    height: 235px; /* Высота 235px */
+    
+    /* Нижний градиент: от 0% черного до 100% черного (опасити 91%) */
+    background: linear-gradient(
+        to top, 
+        rgba(0, 0, 0, 0.91) 0%, /* 91% опасити */
+        rgba(0, 0, 0, 0) 100%
+    );
+    
     display: flex;
     justify-content: space-around; 
     align-items: flex-end; 
-    padding-bottom: 30px; 
+    
+    /* Паддинг 30px по бокам и 70px снизу */
+    padding: 0 30px 70px 30px; 
     box-sizing: border-box;
     z-index: 20; 
 }
 
+/* ОБЩИЕ СТИЛИ ДЛЯ ИКОНОК НИЖНЕЙ ПАНЕЛИ */
 .bottom-icon {
     font-size: 0; 
-    width: 80px; 
-    height: 40px; 
-    text-align: center;
-    cursor: pointer;
+    /* Используем обводку для кнопки галереи */
+    background-color: transparent; 
+    border-radius: 50%; 
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0.7;
+    cursor: pointer;
     transition: opacity 0.2s;
 }
 
-.bottom-icon img {
-    width: 32px; 
-    height: 32px;
-    filter: invert(1); 
+/* КНОПКА ГАЛЕРЕИ (ИКОНКА СЛЕВА) - 61x61, обводка 3px */
+#gallery-trigger {
+    width: 61px; 
+    height: 61px; 
+    border: 3px solid white; /* Белая обводка 3px */
+    /* Имитация заливки при нажатии, если это нужно */
+    transition: background-color 0.1s ease-out;
+}
+#gallery-trigger:active {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Иконка галереи (поскольку SVG не предоставлен, стилизуем FA) */
+/* Иконка Галереи (для FA, если нет SVG) */
 #gallery-trigger i {
-    font-size: 2.2em;
+    font-size: 2em; 
     color: white;
-    opacity: 1;
 }
 
-.bottom-icon:active {
-    opacity: 1;
-}
 
-/* КНОПКА СЪЕМКИ (КЛЮЧЕВОЕ ИЗМЕНЕНИЕ) */
+/* КНОПКА СЪЕМКИ (ЦЕНТР) - 95x95, обводка 6px */
 .capture-button-style {
-    width: 90px; 
-    height: 90px; 
-    /* По умолчанию: прозрачный фон и белая обводка */
+    width: 95px; 
+    height: 95px; 
     background-color: transparent; 
-    border: 5px solid white; 
+    border: 6px solid white; /* Белая обводка 6px */
     border-radius: 50%; 
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    /* Анимация для нажатия */
     transition: background-color 0.1s ease-out, transform 0.1s;
 }
 
-.capture-button-style img {
-    width: 40px; 
-    height: 40px;
+/* Состояние при нажатии: заливка белым */
+.capture-button-style:active {
+    background-color: white; 
+    transform: scale(0.95); 
 }
 
-/* Состояние при нажатии (имитация съемки): заливка белым */
-.capture-button-style:active {
-    background-color: white; /* Фон заполняется белым */
-    transform: scale(0.95); /* Небольшое сжатие */
+/* SVG внутри кнопок и иконок */
+.bottom-icon img, .capture-button-style img {
+    /* Обеспечиваем, что иконки внутри кнопок белые */
+    filter: drop-shadow(0 0 0 white) invert(1) brightness(100); 
+}
+.capture-button-style img {
+    width: 45px; 
+    height: 45px;
 }
