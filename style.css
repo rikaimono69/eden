@@ -12,44 +12,44 @@ body {
     padding: 0;
     width: 100vw;
     height: 100vh;
-    overflow: hidden; /* Важно для мобильных устройств, чтобы не было прокрутки */
+    overflow: hidden; 
     display: flex;
-    flex-direction: column; /* Элементы располагаются вертикально */
-    font-family: 'Handel Gothic', sans-serif; /* Используем ваш шрифт */
+    flex-direction: column; 
+    font-family: 'Handel Gothic', sans-serif; 
     background-color: #000;
     color: white;
-    -webkit-tap-highlight-color: transparent; /* Убирает синее выделение при тапе на iOS */
-    touch-action: manipulation; /* Улучшает отзывчивость на тач-экранах */
+    -webkit-tap-highlight-color: transparent; 
+    touch-action: manipulation; 
 }
 
 /* --- ВЕРХНЯЯ ПАНЕЛЬ И ГРАДИЕНТ --- */
 #top-bar {
-    position: fixed; /* Прибита к верху */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
-    height: 120px; /* Увеличена высота для градиента */
+    height: 120px; 
     
     /* Верхний градиент: от 100% черного (опасити 14%) до 0% черного */
     background: linear-gradient(
         to bottom, 
-        rgba(0, 0, 0, 0.14) 0%, /* 14% опасити */
+        rgba(0, 0, 0, 0.14) 0%, 
         rgba(0, 0, 0, 0) 100%
     );
     
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Выравнивание по верхнему краю панели */
+    align-items: flex-start; 
     
     /* Паддинг 30px по бокам и 30px сверху */
     padding: 30px 30px 0 30px;
     box-sizing: border-box;
-    z-index: 20; /* Поверх всего */
+    z-index: 20; 
 }
 
 /* Стилизация SVG-иконок в верхнем меню */
 .top-icon {
-    width: 35px; /* Размер 35x35 */
+    width: 35px; /* Размер 35x35px */
     height: 35px;
     display: flex;
     justify-content: center;
@@ -58,51 +58,48 @@ body {
 }
 
 .top-icon img {
-    width: 100%; /* SVG займет весь доступный размер 35x35 */
+    width: 100%; 
     height: 100%;
-    /* Гарантируем, что SVG будут белыми.
-       drop-shadow: создает тень (здесь белую 0x0), затем invert(1) инвертирует цвета,
-       и brightness(100) гарантирует полную яркость. 
-       Это надежный способ сделать любую SVG белой. */
-    filter: drop-shadow(0 0 0 white) invert(1) brightness(100); 
+    /* SVG уже белые, фильтры не нужны */
 }
 
 .app-title {
     font-size: 48px; /* Заголовок 48px */
-    line-height: 1; /* Для точности размера шрифта */
-    margin-top: -5px; /* Небольшая корректировка вертикального положения для соответствия дизайну */
-    color: white; /* Гарантируем белый цвет текста */
+    line-height: 1; 
+    margin-top: -5px; 
+    color: white; 
 }
 
 /* --- КОНТЕЙНЕР ВИДЕО/ИЗОБРАЖЕНИЯ --- */
 #view-container {
-    flex-grow: 1; /* Занимает все доступное пространство между top-bar и bottom-panel */
+    flex-grow: 1; 
     position: relative;
-    display: flex; /* Для центрирования оверлея */
+    display: flex; 
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Скрывает все, что выходит за границы */
+    overflow: hidden; 
 }
 
 #camera-stream, #display-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Растягивает, заполняя контейнер */
-    position: absolute; /* Располагает внутри view-container */
+    object-fit: cover; 
+    position: absolute; 
     top: 0;
     left: 0;
-    z-index: 1; /* Под оверлеем */
+    z-index: 1; 
 }
 
 /* --- ОВЕРЛЕЙ С ТЕКСТОМ И SVG-РАМКАМИ --- */
 #overlay-text {
     position: relative; 
-    width: 90vmin; /* Рамка занимает 90% от наименьшей стороны экрана (vh или vw) */
+    /* Используем vmin для адаптивности размера рамки относительно экрана */
+    width: 90vmin; 
     height: 90vmin;
-    max-width: 500px; /* Максимальный размер рамки */
+    max-width: 500px; 
     max-height: 500px;
-    z-index: 5; /* Поверх видео */
-    display: flex; /* Используем flex для центрирования текста внутри SVG-рамки */
+    z-index: 5; 
+    display: flex; 
     justify-content: center;
     align-items: center;
 }
@@ -114,24 +111,23 @@ body {
     top: 0;
     left: 0;
     z-index: 5;
-    /* Делаем SVG белым и полупрозрачным */
-    filter: drop-shadow(0 0 0 white) invert(1) brightness(100); 
+    /* SVG уже белый, оставляем только opacity */
     opacity: 0.7; 
 }
 
 #overlay-label {
     text-align: center;
-    color: white; /* Чисто белый текст */
+    color: white; 
     font-size: 24px; /* Текст 24px */
     line-height: 1.2;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Небольшая тень для читаемости */
-    z-index: 6; /* Поверх SVG-рамки */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); 
+    z-index: 6; 
 }
 
 
 /* --- НИЖНЯЯ ПАНЕЛЬ УПРАВЛЕНИЯ И ГРАДИЕНТ --- */
 #bottom-panel {
-    position: fixed; /* Прибита к низу */
+    position: fixed; 
     bottom: 0;
     left: 0;
     width: 100%;
@@ -140,23 +136,23 @@ body {
     /* Нижний градиент: от 0% черного до 100% черного (опасити 91%) */
     background: linear-gradient(
         to top, 
-        rgba(0, 0, 0, 0.91) 0%, /* 91% опасити */
+        rgba(0, 0, 0, 0.91) 0%, 
         rgba(0, 0, 0, 0) 100%
     );
     
     display: flex;
-    justify-content: space-around; /* Распределяем элементы по горизонтали */
-    align-items: flex-end; /* Выравниваем элементы по нижнему краю панели */
+    justify-content: space-around; 
+    align-items: flex-end; 
     
     /* Паддинг 30px по бокам и 70px снизу */
     padding: 0 30px 70px 30px; 
     box-sizing: border-box;
-    z-index: 20; /* Поверх всего */
+    z-index: 20; 
 }
 
 /* ОБЩИЕ СТИЛИ ДЛЯ ИКОНОК НИЖНЕЙ ПАНЕЛИ */
 .bottom-icon {
-    font-size: 0; /* Скрываем Font Awesome, если он там есть, чтобы отображать SVG/фон */
+    font-size: 0; 
     background-color: transparent; 
     border-radius: 50%; 
     display: flex;
@@ -170,55 +166,62 @@ body {
 #gallery-trigger {
     width: 61px; 
     height: 61px; 
-    border: 3px solid white; /* Белая обводка 3px */
+    border: 3px solid white; 
     transition: background-color 0.1s ease-out;
 }
-/* Активация кнопки галереи (легкое затемнение/заливка) */
 #gallery-trigger:active {
-    background-color: rgba(255, 255, 255, 0.2); /* Небольшая прозрачная заливка */
+    background-color: rgba(255, 255, 255, 0.2); 
 }
 
 /* Стилизация иконки внутри кнопки галереи (если это Font Awesome) */
 #gallery-trigger i {
-    font-size: 2em; /* Размер иконки Font Awesome */
-    color: white; /* Белый цвет */
+    font-size: 2em; 
+    color: white; 
 }
 
 /* КНОПКА СЪЕМКИ (ЦЕНТР) - 95x95, обводка 6px */
 .capture-button-style {
     width: 95px; 
     height: 95px; 
-    background-color: transparent; /* Прозрачный фон по умолчанию */
-    border: 6px solid white; /* Белая обводка 6px */
-    border-radius: 50%; /* Круглая форма */
+    background-color: transparent; 
+    border: 6px solid white; 
+    border-radius: 50%; 
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3); /* Небольшая тень */
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
     transition: background-color 0.1s ease-out, transform 0.1s;
 }
 
 /* Состояние при нажатии на кнопку съемки: заливка белым */
 .capture-button-style:active {
-    background-color: white; /* Фон заполняется белым */
-    transform: scale(0.95); /* Небольшое сжатие для эффекта нажатия */
+    background-color: white; 
+    transform: scale(0.95); 
 }
 
 /* SVG-иконки внутри кнопок и иконок нижней панели */
 .bottom-icon img, .capture-button-style img {
-    /* Обеспечиваем, что SVG-иконки внутри кнопок белые */
-    filter: drop-shadow(0 0 0 white) invert(1) brightness(100); 
+    /* SVG уже белые, фильтры не нужны */
+    filter: none; 
+    opacity: 1;
 }
 
 /* Конкретный размер для иконки камеры */
 .capture-button-style img {
-    width: 45px; /* Размер иконки камеры */
+    width: 45px; 
     height: 45px;
 }
 
-/* Размер для иконок флэша (если есть SVG) */
+/* ИКОНКА FLASH (СПРАВА) - 49x49px */
 .bottom-icon img[src="flash.svg"] {
-    width: 32px; /* Примерный размер, если нужно точнее */
-    height: 32px;
+    width: 49px; 
+    height: 49px;
+    opacity: 0.7; /* Делаем чуть более прозрачным, как другие иконки управления */
+}
+
+/* Гарантируем, что контейнер для flash svg не будет маленьким */
+.bottom-icon:has(img[src="flash.svg"]) {
+    width: 49px; 
+    height: 49px;
 }
