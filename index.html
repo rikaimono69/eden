@@ -2,11 +2,18 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мобильная Камера</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Мобильная Камера Eden</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+
+    <div id="top-bar">
+        <div class="top-icon"><i class="far fa-clock"></i></div>
+        <div class="app-title">EDEN</div>
+        <div class="top-icon"><i class="fas fa-ellipsis-v"></i></div>
+    </div>
 
     <div id="view-container">
         <video id="camera-stream" autoplay playsinline></video>
@@ -14,19 +21,27 @@
         <img id="display-image" style="display: none;" alt="Сделанный снимок или выбранное изображение">
         
         <canvas id="photo-canvas" style="display: none;"></canvas>
+
+        <div id="overlay-text">
+            <span class="bracket-top-left"></span>
+            <span class="bracket-top-right"></span>
+            МЕСТО <br> ДЛЯ ВАШЕГО <br> ЯБЛОКА
+            <span class="bracket-bottom-left"></span>
+            <span class="bracket-bottom-right"></span>
+        </div>
     </div>
 
-    <div id="controls-panel">
+    <div id="bottom-panel">
+        <div class="bottom-icon">
+            <i class="far fa-circle"></i> </div>
+
+        <button id="capture-button" class="capture-button-style">
+            <i class="fas fa-camera"></i> </button>
+
+        <div class="bottom-icon">
+            <i class="fas fa-volume-mute"></i> </div>
         
-        <label for="file-input" class="control-button gallery-icon">
-            🖼️ Галерея
-        </label>
         <input type="file" id="file-input" accept="image/*" style="display: none;">
-
-        <button id="capture-button" class="control-button capture-icon">
-            📸 Снять
-        </button>
-
     </div>
     
     <script src="script.js"></script>
