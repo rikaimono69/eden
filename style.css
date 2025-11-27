@@ -15,7 +15,7 @@ body {
     overflow: hidden; 
     display: flex;
     flex-direction: column; 
-    font-family: 'Handel Gothic', sans-serif; /* Используем ваш шрифт */
+    font-family: 'Handel Gothic', sans-serif; 
     background-color: #000;
     color: white;
     -webkit-tap-highlight-color: transparent; 
@@ -53,7 +53,7 @@ body {
 .top-icon img {
     width: 28px;
     height: 28px;
-    filter: invert(1); /* Инвертируем, чтобы SVG стали белыми */
+    filter: invert(1); 
 }
 
 .app-title {
@@ -83,12 +83,12 @@ body {
 /* ОВЕРЛЕЙ С ТЕКСТОМ И SVG-РАМКАМИ */
 #overlay-text {
     position: relative; 
-    width: 80%; /* Задаем область для рамки */
-    max-width: 400px;
-    aspect-ratio: 1 / 1; /* Отношение сторон, чтобы рамка не была сильно растянута */
-    margin-top: -60px; /* Сдвигаем вверх, чтобы центрировать визуально */
+    width: 90vmin; /* Рамка занимает 90% от наименьшей стороны экрана */
+    height: 90vmin;
+    max-width: 500px;
+    max-height: 500px;
     z-index: 5;
-    display: flex; /* Используем flex для центрирования текста */
+    display: flex; 
     justify-content: center;
     align-items: center;
 }
@@ -123,16 +123,16 @@ body {
     background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0)); 
     display: flex;
     justify-content: space-around; 
-    align-items: flex-end; /* Выравнивание по нижнему краю */
+    align-items: flex-end; 
     padding-bottom: 30px; 
     box-sizing: border-box;
     z-index: 20; 
 }
 
 .bottom-icon {
-    font-size: 0; /* Скрываем Font Awesome, если он там есть */
+    font-size: 0; 
     width: 80px; 
-    height: 40px; /* Устанавливаем высоту для иконок */
+    height: 40px; 
     text-align: center;
     cursor: pointer;
     display: flex;
@@ -145,41 +145,44 @@ body {
 .bottom-icon img {
     width: 32px; 
     height: 32px;
-    filter: invert(1); /* Делаем иконки белыми */
+    filter: invert(1); 
 }
 
-.gallery-icon i {
-    /* Если не предоставлен SVG для галереи, используем Font Awesome */
+/* Иконка галереи (поскольку SVG не предоставлен, стилизуем FA) */
+#gallery-trigger i {
     font-size: 2.2em;
     color: white;
-    opacity: 1; /* Фонтовая иконка уже белая */
+    opacity: 1;
 }
 
 .bottom-icon:active {
     opacity: 1;
 }
 
-/* Кнопка съемки по центру */
+/* КНОПКА СЪЕМКИ (КЛЮЧЕВОЕ ИЗМЕНЕНИЕ) */
 .capture-button-style {
     width: 90px; 
     height: 90px; 
-    background-color: white; 
+    /* По умолчанию: прозрачный фон и белая обводка */
+    background-color: transparent; 
+    border: 5px solid white; 
     border-radius: 50%; 
-    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    transition: transform 0.1s;
+    /* Анимация для нажатия */
+    transition: background-color 0.1s ease-out, transform 0.1s;
 }
 
 .capture-button-style img {
     width: 40px; 
     height: 40px;
-    /* Иконка камеры, скорее всего, темная, поэтому фильтр не нужен */
 }
 
+/* Состояние при нажатии (имитация съемки): заливка белым */
 .capture-button-style:active {
-    transform: scale(0.95); 
+    background-color: white; /* Фон заполняется белым */
+    transform: scale(0.95); /* Небольшое сжатие */
 }
