@@ -1,97 +1,51 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const video = document.getElementById('camera-stream');
-    const displayImage = document.getElementById('display-image');
-    const captureButton = document.getElementById('capture-button');
-    const fileInput = document.getElementById('file-input');
-    const photoCanvas = document.getElementById('photo-canvas');
-    // Теперь используем ID для триггера галереи
-    const galleryTrigger = document.getElementById('gallery-trigger'); 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Мобильная Камера EDEN</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
 
-    let currentStream = null;
+    <div id="top-bar">
+        <div class="top-icon"><img src="time.svg" alt="Time icon"></div>
+        <div class="app-title">EDEN</div>
+        <div class="top-icon"><img src="settings.svg" alt="Settings icon"></div>
+    </div>
 
-    // --- ФУНКЦИЯ 1: ЗАПУСК КАМЕРЫ ---
-    function startCamera() {
-        displayImage.style.display = 'none';
-        video.style.display = 'block';
+    <div id="view-container">
+        <video id="camera-stream" autoplay playsinline></video>
+        <img id="display-image" style="display: none;" alt="Сделанный снимок или выбранное изображение">
+        <canvas id="photo-canvas" style="display: none;"></canvas>
 
-        // Показываем оверлей
-        document.getElementById('overlay-text').style.display = 'flex'; 
+        <div id="overlay-text">
+            <img src="subtract.svg" id="brackets-svg" alt="Рамки">
+            <div id="overlay-label">
+                МЕСТО <br> ДЛЯ ВАШЕГО <br> ЯБЛОКА
+            </div>
+        </div>
+    </div>
 
-        if (currentStream) {
-            currentStream.getTracks().forEach(track => track.stop());
-        }
-
-        navigator.mediaDevices.getUserMedia({ 
-            video: { 
-                facingMode: 'environment' 
-            } 
-        })
-        .then(stream => {
-            currentStream = stream;
-            video.srcObject = stream;
-        })
-        .catch(err => {
-            console.error("Ошибка доступа к камере:", err);
-            alert("Не удалось получить доступ к камере. Убедитесь, что вы используете HTTPS.");
-        });
-    }
-
-    // --- ФУНКЦИЯ 2: СДЕЛАТЬ СНИМОК ---
-    captureButton.addEventListener('click', () => {
-        if (!currentStream) {
-            alert("Камера не активна.");
-            return;
-        }
-
-        // --- Визуальный эффект нажатия ---
-        // Имитация "вспышки" белого круга происходит за счет CSS-псевдокласса :active.
-        // Браузер сам обрабатывает смену стиля при нажатии и отпускании.
-        // Далее идет логика захвата кадра:
-        // ---------------------------------
+    <div id="bottom-panel">
         
-        photoCanvas.width = video.videoWidth;
-        photoCanvas.height = video.videoHeight;
+        <div class="bottom-icon" id="gallery-trigger">
+            <i class="far fa-circle"></i> 
+        </div>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
         
-        const context = photoCanvas.getContext('2d');
-        context.drawImage(video, 0, 0, photoCanvas.width, photoCanvas.height);
+        <button id="capture-button" class="capture-button-style">
+            <img src="camera.svg" alt="Camera icon">
+        </button>
+
+        <div class="bottom-icon">
+            <img src="flash.svg" alt="Flash icon">
+        </div>
         
-        const photoDataUrl = photoCanvas.toDataURL('image/jpeg', 0.9);
-        
-        displayImage.src = photoDataUrl;
-        displayImage.style.display = 'block';
-        video.style.display = 'none';
-
-        // Скрываем оверлей после съемки
-        document.getElementById('overlay-text').style.display = 'none';
-
-        currentStream.getTracks().forEach(track => track.stop());
-        currentStream = null; 
-    });
-
-    // --- ФУНКЦИЯ 3: ВЫБОР ИЗОБРАЖЕНИЯ ИЗ ГАЛЕРЕИ ---
-    galleryTrigger.addEventListener('click', () => {
-        fileInput.click(); 
-    });
-
-    fileInput.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            if (currentStream) {
-                 currentStream.getTracks().forEach(track => track.stop());
-                 currentStream = null; 
-            }
-
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                displayImage.src = e.target.result;
-                displayImage.style.display = 'block';
-                video.style.display = 'none';
-                // Скрываем оверлей при выборе изображения из галереи
-                document.getElementById('overlay-text').style.display = 'none';
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    startCamera();
-});
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
