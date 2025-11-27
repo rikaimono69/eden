@@ -312,10 +312,4 @@ body {
     background: linear-gradient(22deg, #EF9241 100%, #EEA552 62%, #FBAC67 16%);
 }
 
-.grade-neutral #reset-button:active {
-    background-color: white;
-    /* Устанавливаем цвет текста в цвет самого градиента (оранжевый) */
-    color: #EF9241 !important; 
-}
-
 /* ... (Вся остальная часть вашего CSS остается прежней) ... */
