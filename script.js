@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const captureButton = document.getElementById('capture-button');
     const fileInput = document.getElementById('file-input');
     const photoCanvas = document.getElementById('photo-canvas');
-    // Левая иконка для галереи
-    const galleryButton = document.querySelector('.bottom-icon:first-child'); 
+    // Теперь используем ID для триггера галереи
+    const galleryTrigger = document.getElementById('gallery-trigger'); 
 
     let currentStream = null;
 
@@ -43,6 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // --- Визуальный эффект нажатия ---
+        // Имитация "вспышки" белого круга происходит за счет CSS-псевдокласса :active.
+        // Браузер сам обрабатывает смену стиля при нажатии и отпускании.
+        // Далее идет логика захвата кадра:
+        // ---------------------------------
+        
         photoCanvas.width = video.videoWidth;
         photoCanvas.height = video.videoHeight;
         
@@ -63,8 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- ФУНКЦИЯ 3: ВЫБОР ИЗОБРАЖЕНИЯ ИЗ ГАЛЕРЕИ ---
-    // Активация fileInput привязана к левой иконке
-    galleryButton.addEventListener('click', () => {
+    galleryTrigger.addEventListener('click', () => {
         fileInput.click(); 
     });
 
