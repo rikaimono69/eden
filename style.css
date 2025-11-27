@@ -106,13 +106,11 @@ body {
 
 #brackets-svg {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 293px;
+    height: 293px;
     top: 0;
     left: 0;
     z-index: 5;
-    /* SVG уже белый, оставляем только opacity */
-    opacity: 0.7; 
 }
 
 #overlay-label {
@@ -131,7 +129,6 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 235px; /* Высота 235px */
     
     /* Нижний градиент: от 0% черного до 100% черного (опасити 91%) */
     background: linear-gradient(
@@ -142,7 +139,7 @@ body {
     
     display: flex;
     justify-content: space-between; 
-    align-items: flex-end; 
+    align-items: center; 
     
     /* Паддинг 30px по бокам и 70px снизу */
     padding: 0 30px 70px 30px; 
@@ -217,7 +214,6 @@ body {
 .bottom-icon img[src="flash.svg"] {
     width: 49px; 
     height: 49px;
-    opacity: 0.7; /* Делаем чуть более прозрачным, как другие иконки управления */
 }
 
 /* Гарантируем, что контейнер для flash svg не будет маленьким */
