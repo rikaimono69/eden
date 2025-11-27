@@ -221,3 +221,104 @@ body {
     width: 49px; 
     height: 49px;
 }
+/* ... (Ваш предоставленный CSS-код без изменений) ... */
+
+/* --- НОВЫЕ СТИЛИ ДЛЯ ПАНЕЛИ РЕЗУЛЬТАТОВ --- */
+
+#result-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 250px; /* Достаточная высота для анимации и содержимого */
+    z-index: 30; /* Поверх всех других панелей */
+    
+    /* Стили прямоугольника */
+    background: #000; /* Цвет по умолчанию */
+    border-radius: 40px 40px 0 0; /* Закругление верхних углов */
+    padding: 30px 30px;
+    box-sizing: border-box;
+    
+    /* Flexbox для расположения текста и кнопки (space-between) */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    
+    /* Анимация: Изначально скрыт внизу */
+    transform: translateY(100%);
+    transition: transform 0.4s ease-out;
+}
+
+#result-panel.show {
+    /* При появлении поднимаем его в видимую область */
+    transform: translateY(0);
+}
+
+#result-panel.hidden {
+    display: none; /* Скрываем, когда не используется */
+}
+
+/* Текст внутри панели результатов */
+#result-text {
+    font-family: sans-serif; /* Использование sans-serif */
+    font-size: 20px;
+    font-weight: 600; /* Semi bold */
+    color: white; /* Цвет будет меняться в JS */
+    text-align: center;
+    width: 100%;
+}
+
+/* Кнопка "Еще фото" */
+#reset-button {
+    width: 100%;
+    height: 60px;
+    background-color: transparent;
+    border: 2px solid white; /* Ширина бордера 2 */
+    border-radius: 40px; /* Бордер радиус 40 */
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: 600;
+    
+    /* Цвет текста по умолчанию */
+    color: white;
+    transition: background-color 0.1s, color 0.1s;
+}
+
+/* Состояние нажатия кнопки */
+#reset-button:active {
+    /* При нажатии: бэкграунд белый, текст берет цвет прямоугольника (устанавливается JS) */
+    background-color: white;
+}
+
+/* --- Стили Градиентов (Динамические классы) --- */
+
+/* Градиент: Яблоко Хорошее (зеленый) */
+.grade-good {
+    /* Верхний цвет 81A441 (16%), Средний 6A8A30 (62%), Нижний 5E7D27 (100%) */
+    background: linear-gradient(22deg, #5E7D27 100%, #6A8A30 62%, #81A441 16%);
+}
+
+/* Градиент: Яблоко Плохое (красный) */
+.grade-bad {
+    /* Верхний цвет BF2929, Средний AD2222, Нижний 9F2222 */
+    background: linear-gradient(22deg, #9F2222 100%, #AD2222 62%, #BF2929 16%);
+}
+
+/* Градиент: Не Яблоко (оранжевый) */
+.grade-neutral {
+    /* Верхний цвет FBAC67, Средний EEA552, Нижний EF9241 */
+    background: linear-gradient(22deg, #EF9241 100%, #EEA552 62%, #FBAC67 16%);
+}
+
+/* Цвет текста кнопки для нейтрального состояния (оранжевый фон требует темного текста) */
+.grade-neutral #reset-button {
+    border-color: #333; /* Темная обводка */
+    color: #333; /* Темный текст */
+}
+.grade-neutral #reset-button:active {
+    background-color: white;
+    color: #EF9241 !important; /* Цвет фона становится цветом текста при нажатии */
+}
