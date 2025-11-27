@@ -94,14 +94,13 @@ body {
 #overlay-text {
     position: relative; 
     /* Используем vmin для адаптивности размера рамки относительно экрана */
-    width: 90vmin; 
-    height: 90vmin;
-    max-width: 500px; 
-    max-height: 500px;
+    max-width: 70vw;
+    max-height: 70vw;
     z-index: 5; 
     display: flex; 
     justify-content: center;
     align-items: center;
+    opacity: .3;
 }
 
 #brackets-svg {
