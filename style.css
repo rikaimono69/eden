@@ -12,18 +12,19 @@ body {
     padding: 0;
     width: 100vw;
     height: 100vh;
-    overflow: hidden; 
+    overflow: hidden; /* Важно для мобильных устройств, чтобы не было прокрутки */
     display: flex;
-    flex-direction: column; 
-    font-family: 'Handel Gothic', sans-serif; 
+    flex-direction: column; /* Элементы располагаются вертикально */
+    font-family: 'Handel Gothic', sans-serif; /* Используем ваш шрифт */
     background-color: #000;
     color: white;
-    -webkit-tap-highlight-color: transparent; 
+    -webkit-tap-highlight-color: transparent; /* Убирает синее выделение при тапе на iOS */
+    touch-action: manipulation; /* Улучшает отзывчивость на тач-экранах */
 }
 
 /* --- ВЕРХНЯЯ ПАНЕЛЬ И ГРАДИЕНТ --- */
 #top-bar {
-    position: fixed; 
+    position: fixed; /* Прибита к верху */
     top: 0;
     left: 0;
     width: 100%;
@@ -38,66 +39,70 @@ body {
     
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Выравнивание по верхнему краю */
+    align-items: flex-start; /* Выравнивание по верхнему краю панели */
     
     /* Паддинг 30px по бокам и 30px сверху */
     padding: 30px 30px 0 30px;
     box-sizing: border-box;
-    z-index: 20; 
+    z-index: 20; /* Поверх всего */
 }
 
 /* Стилизация SVG-иконок в верхнем меню */
 .top-icon {
-    width: 40px; 
-    height: 40px;
+    width: 35px; /* Размер 35x35 */
+    height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .top-icon img {
-    width: 28px;
-    height: 28px;
-    /* Убираем filter: invert(1), так как все должно быть белым по умолчанию. 
-       Если SVG черные, используем filter: drop-shadow, чтобы окрасить в белый. */
+    width: 100%; /* SVG займет весь доступный размер 35x35 */
+    height: 100%;
+    /* Гарантируем, что SVG будут белыми.
+       drop-shadow: создает тень (здесь белую 0x0), затем invert(1) инвертирует цвета,
+       и brightness(100) гарантирует полную яркость. 
+       Это надежный способ сделать любую SVG белой. */
     filter: drop-shadow(0 0 0 white) invert(1) brightness(100); 
 }
 
 .app-title {
     font-size: 48px; /* Заголовок 48px */
-    line-height: 1; /* Для точности размера */
-    margin-top: -10px; /* Корректировка вертикального положения, если нужно */
+    line-height: 1; /* Для точности размера шрифта */
+    margin-top: -5px; /* Небольшая корректировка вертикального положения для соответствия дизайну */
+    color: white; /* Гарантируем белый цвет текста */
 }
 
 /* --- КОНТЕЙНЕР ВИДЕО/ИЗОБРАЖЕНИЯ --- */
 #view-container {
-    flex-grow: 1; 
+    flex-grow: 1; /* Занимает все доступное пространство между top-bar и bottom-panel */
     position: relative;
-    display: flex;
+    display: flex; /* Для центрирования оверлея */
     justify-content: center;
     align-items: center;
-    overflow: hidden; 
+    overflow: hidden; /* Скрывает все, что выходит за границы */
 }
 
 #camera-stream, #display-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
-    position: absolute; 
+    object-fit: cover; /* Растягивает, заполняя контейнер */
+    position: absolute; /* Располагает внутри view-container */
     top: 0;
     left: 0;
-    z-index: 1; 
+    z-index: 1; /* Под оверлеем */
 }
 
 /* --- ОВЕРЛЕЙ С ТЕКСТОМ И SVG-РАМКАМИ --- */
 #overlay-text {
     position: relative; 
-    width: 90vmin; 
+    width: 90vmin; /* Рамка занимает 90% от наименьшей стороны экрана (vh или vw) */
     height: 90vmin;
-    max-width: 500px;
+    max-width: 500px; /* Максимальный размер рамки */
     max-height: 500px;
-    z-index: 5;
-    display: flex; 
+    z-index: 5; /* Поверх видео */
+    display: flex; /* Используем flex для центрирования текста внутри SVG-рамки */
     justify-content: center;
     align-items: center;
 }
@@ -109,7 +114,7 @@ body {
     top: 0;
     left: 0;
     z-index: 5;
-    /* Убеждаемся, что SVG белый и полупрозрачный */
+    /* Делаем SVG белым и полупрозрачным */
     filter: drop-shadow(0 0 0 white) invert(1) brightness(100); 
     opacity: 0.7; 
 }
@@ -119,14 +124,14 @@ body {
     color: white; /* Чисто белый текст */
     font-size: 24px; /* Текст 24px */
     line-height: 1.2;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    z-index: 6; 
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Небольшая тень для читаемости */
+    z-index: 6; /* Поверх SVG-рамки */
 }
 
 
 /* --- НИЖНЯЯ ПАНЕЛЬ УПРАВЛЕНИЯ И ГРАДИЕНТ --- */
 #bottom-panel {
-    position: fixed; 
+    position: fixed; /* Прибита к низу */
     bottom: 0;
     left: 0;
     width: 100%;
@@ -140,19 +145,18 @@ body {
     );
     
     display: flex;
-    justify-content: space-around; 
-    align-items: flex-end; 
+    justify-content: space-around; /* Распределяем элементы по горизонтали */
+    align-items: flex-end; /* Выравниваем элементы по нижнему краю панели */
     
     /* Паддинг 30px по бокам и 70px снизу */
     padding: 0 30px 70px 30px; 
     box-sizing: border-box;
-    z-index: 20; 
+    z-index: 20; /* Поверх всего */
 }
 
 /* ОБЩИЕ СТИЛИ ДЛЯ ИКОНОК НИЖНЕЙ ПАНЕЛИ */
 .bottom-icon {
-    font-size: 0; 
-    /* Используем обводку для кнопки галереи */
+    font-size: 0; /* Скрываем Font Awesome, если он там есть, чтобы отображать SVG/фон */
     background-color: transparent; 
     border-radius: 50%; 
     display: flex;
@@ -167,47 +171,54 @@ body {
     width: 61px; 
     height: 61px; 
     border: 3px solid white; /* Белая обводка 3px */
-    /* Имитация заливки при нажатии, если это нужно */
     transition: background-color 0.1s ease-out;
 }
+/* Активация кнопки галереи (легкое затемнение/заливка) */
 #gallery-trigger:active {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2); /* Небольшая прозрачная заливка */
 }
 
-/* Иконка Галереи (для FA, если нет SVG) */
+/* Стилизация иконки внутри кнопки галереи (если это Font Awesome) */
 #gallery-trigger i {
-    font-size: 2em; 
-    color: white;
+    font-size: 2em; /* Размер иконки Font Awesome */
+    color: white; /* Белый цвет */
 }
-
 
 /* КНОПКА СЪЕМКИ (ЦЕНТР) - 95x95, обводка 6px */
 .capture-button-style {
     width: 95px; 
     height: 95px; 
-    background-color: transparent; 
+    background-color: transparent; /* Прозрачный фон по умолчанию */
     border: 6px solid white; /* Белая обводка 6px */
-    border-radius: 50%; 
+    border-radius: 50%; /* Круглая форма */
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3); /* Небольшая тень */
     transition: background-color 0.1s ease-out, transform 0.1s;
 }
 
-/* Состояние при нажатии: заливка белым */
+/* Состояние при нажатии на кнопку съемки: заливка белым */
 .capture-button-style:active {
-    background-color: white; 
-    transform: scale(0.95); 
+    background-color: white; /* Фон заполняется белым */
+    transform: scale(0.95); /* Небольшое сжатие для эффекта нажатия */
 }
 
-/* SVG внутри кнопок и иконок */
+/* SVG-иконки внутри кнопок и иконок нижней панели */
 .bottom-icon img, .capture-button-style img {
-    /* Обеспечиваем, что иконки внутри кнопок белые */
+    /* Обеспечиваем, что SVG-иконки внутри кнопок белые */
     filter: drop-shadow(0 0 0 white) invert(1) brightness(100); 
 }
+
+/* Конкретный размер для иконки камеры */
 .capture-button-style img {
-    width: 45px; 
+    width: 45px; /* Размер иконки камеры */
     height: 45px;
+}
+
+/* Размер для иконок флэша (если есть SVG) */
+.bottom-icon img[src="flash.svg"] {
+    width: 32px; /* Примерный размер, если нужно точнее */
+    height: 32px;
 }
