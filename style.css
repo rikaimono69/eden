@@ -1,125 +1,158 @@
+/* ПОДКЛЮЧЕНИЕ КАСТОМНОГО ШРИФТА */
+@font-face {
+    font-family: 'Handel Gothic';
+    src: url('HandelGothicBTRusbyme.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* ОБЩИЙ СБРОС И ОСНОВНОЙ МАКЕТ */
 body {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
-    overflow: hidden; /* Важно для мобильных устройств, чтобы не было прокрутки */
+    overflow: hidden; 
     display: flex;
-    flex-direction: column; /* Элементы располагаются вертикально */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Похожий шрифт */
+    flex-direction: column; 
+    font-family: 'Handel Gothic', sans-serif; /* Используем ваш шрифт */
     background-color: #000;
     color: white;
-    -webkit-tap-highlight-color: transparent; /* Убирает синее выделение при тапе на iOS */
+    -webkit-tap-highlight-color: transparent; 
 }
 
 /* ВЕРХНЯЯ ПАНЕЛЬ */
 #top-bar {
-    position: fixed; /* Прибита к верху */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px; /* Фиксированная высота */
-    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0)); /* Градиент */
+    height: 60px; 
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0)); 
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 15px;
     box-sizing: border-box;
-    z-index: 20; /* Поверх всего */
+    z-index: 20; 
     color: white;
     font-size: 1.2em;
     text-transform: uppercase;
-    font-weight: bold;
     letter-spacing: 1px;
 }
 
+/* Стилизация SVG-иконок в верхнем меню */
 .top-icon {
-    font-size: 1.5em; /* Размер иконок */
-    width: 40px;
-    text-align: center;
+    width: 40px; 
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-icon img {
+    width: 28px;
+    height: 28px;
+    filter: invert(1); /* Инвертируем, чтобы SVG стали белыми */
 }
 
 .app-title {
-    font-size: 1.8em; /* Размер заголовка Eden */
+    font-size: 1.8em; 
 }
 
 /* КОНТЕЙНЕР ДЛЯ ВИДЕО/ИЗОБРАЖЕНИЯ */
 #view-container {
-    flex-grow: 1; /* Занимает все доступное пространство между top-bar и bottom-panel */
+    flex-grow: 1; 
     position: relative;
-    display: flex; /* Для центрирования оверлея */
+    display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Скрывает все, что выходит за границы */
+    overflow: hidden; 
 }
 
 #camera-stream, #display-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Растягивает, заполняя контейнер */
-    position: absolute; /* Располагает внутри view-container */
+    object-fit: cover; 
+    position: absolute; 
     top: 0;
     left: 0;
-    z-index: 1; /* Под оверлеем */
+    z-index: 1; 
 }
 
-/* ОВЕРЛЕЙ С ТЕКСТОМ "МЕСТО ДЛЯ ВАШЕГО ЯБЛОКА" */
+/* ОВЕРЛЕЙ С ТЕКСТОМ И SVG-РАМКАМИ */
 #overlay-text {
-    position: relative; /* Чтобы рамки были относительно текста */
-    text-align: center;
-    color: rgba(255, 255, 255, 0.7); /* Полупрозрачный белый */
-    font-size: 1.3em;
-    font-weight: bold;
-    line-height: 1.4;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    z-index: 5; /* Поверх видео */
-    display: flex;
-    flex-direction: column;
+    position: relative; 
+    width: 80%; /* Задаем область для рамки */
+    max-width: 400px;
+    aspect-ratio: 1 / 1; /* Отношение сторон, чтобы рамка не была сильно растянута */
+    margin-top: -60px; /* Сдвигаем вверх, чтобы центрировать визуально */
+    z-index: 5;
+    display: flex; /* Используем flex для центрирования текста */
     justify-content: center;
     align-items: center;
-    padding: 20px; /* Отступ вокруг текста */
 }
 
-#overlay-text span {
+#brackets-svg {
     position: absolute;
-    width: 30px; /* Длина уголка */
-    height: 30px; /* Высота уголка */
-    border: 3px solid rgba(255, 255, 255, 0.5); /* Цвет и толщина рамки */
-    pointer-events: none; /* Чтобы не перехватывал события клика */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    filter: invert(1) opacity(0.7); /* Делаем SVG белым и полупрозрачным */
 }
 
-/* Позиционирование уголков */
-.bracket-top-left { top: -15px; left: -15px; border-right: none; border-bottom: none; }
-.bracket-top-right { top: -15px; right: -15px; border-left: none; border-bottom: none; }
-.bracket-bottom-left { bottom: -15px; left: -15px; border-right: none; border-top: none; }
-.bracket-bottom-right { bottom: -15px; right: -15px; border-left: none; border-top: none; }
+#overlay-label {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.3em;
+    line-height: 1.2;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    z-index: 6; 
+}
 
 
 /* НИЖНЯЯ ПАНЕЛЬ УПРАВЛЕНИЯ */
 #bottom-panel {
-    position: fixed; /* Прибита к низу */
+    position: fixed; 
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 150px; /* Высота панели как на скриншоте */
-    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0)); /* Градиент */
+    height: 150px; 
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0)); 
     display: flex;
-    justify-content: space-around; /* Распределяем элементы */
-    align-items: flex-end; /* Выравниваем по нижнему краю */
-    padding-bottom: 30px; /* Отступ снизу */
+    justify-content: space-around; 
+    align-items: flex-end; /* Выравнивание по нижнему краю */
+    padding-bottom: 30px; 
     box-sizing: border-box;
-    z-index: 20; /* Поверх всего */
+    z-index: 20; 
 }
 
 .bottom-icon {
-    font-size: 2.2em; /* Размер иконок */
-    color: white;
-    opacity: 0.7;
-    width: 80px; /* Фиксированная ширина для равномерности */
+    font-size: 0; /* Скрываем Font Awesome, если он там есть */
+    width: 80px; 
+    height: 40px; /* Устанавливаем высоту для иконок */
     text-align: center;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7;
     transition: opacity 0.2s;
+}
+
+.bottom-icon img {
+    width: 32px; 
+    height: 32px;
+    filter: invert(1); /* Делаем иконки белыми */
+}
+
+.gallery-icon i {
+    /* Если не предоставлен SVG для галереи, используем Font Awesome */
+    font-size: 2.2em;
+    color: white;
+    opacity: 1; /* Фонтовая иконка уже белая */
 }
 
 .bottom-icon:active {
@@ -128,10 +161,10 @@ body {
 
 /* Кнопка съемки по центру */
 .capture-button-style {
-    width: 90px; /* Ширина */
-    height: 90px; /* Высота */
-    background-color: white; /* Белый фон */
-    border-radius: 50%; /* Круглая форма */
+    width: 90px; 
+    height: 90px; 
+    background-color: white; 
+    border-radius: 50%; 
     border: none;
     display: flex;
     justify-content: center;
@@ -141,16 +174,12 @@ body {
     transition: transform 0.1s;
 }
 
-.capture-button-style i {
-    color: #333; /* Цвет иконки камеры */
-    font-size: 2.5em; /* Размер иконки */
+.capture-button-style img {
+    width: 40px; 
+    height: 40px;
+    /* Иконка камеры, скорее всего, темная, поэтому фильтр не нужен */
 }
 
 .capture-button-style:active {
-    transform: scale(0.95); /* Небольшое сжатие при нажатии */
-}
-
-/* Стили для элементов, которые должны быть скрыты, но могут быть показаны JS */
-#photo-canvas {
-    display: none;
+    transform: scale(0.95); 
 }
