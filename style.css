@@ -92,7 +92,7 @@ body {
 
 /* --- ОВЕРЛЕЙ С ТЕКСТОМ И SVG-РАМКАМИ --- */
 #overlay-text {
-    position: relative; 
+    position: absolute; 
     /* Используем vmin для адаптивности размера рамки относительно экрана */
     max-width: 70vw;
     max-height: 70vw;
