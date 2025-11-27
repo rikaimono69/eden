@@ -225,16 +225,19 @@ body {
 
 /* --- НОВЫЕ СТИЛИ ДЛЯ ПАНЕЛИ РЕЗУЛЬТАТОВ --- */
 
+/* --- НОВЫЕ СТИЛИ ДЛЯ ПАНЕЛИ РЕЗУЛЬТАТОВ (ИСПРАВЛЕНО) --- */
+
 #result-panel {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 250px; /* Достаточная высота для анимации и содержимого */
-    z-index: 30; /* Поверх всех других панелей */
+    height: 250px; 
+    z-index: 30; 
+    
+    /* УДАЛЕНО: background: #000; Теперь фон задается только динамическими классами (grade-good и т.д.) */
     
     /* Стили прямоугольника */
-    background: #000; /* Цвет по умолчанию */
     border-radius: 40px 40px 0 0; /* Закругление верхних углов */
     padding: 30px 30px;
     box-sizing: border-box;
@@ -264,7 +267,7 @@ body {
     font-family: sans-serif; /* Использование sans-serif */
     font-size: 20px;
     font-weight: 600; /* Semi bold */
-    color: white; /* Цвет будет меняться в JS */
+    color: white; 
     text-align: center;
     width: 100%;
 }
@@ -274,8 +277,8 @@ body {
     width: 100%;
     height: 60px;
     background-color: transparent;
-    border: 2px solid white; /* Ширина бордера 2 */
-    border-radius: 40px; /* Бордер радиус 40 */
+    border: 2px solid white; 
+    border-radius: 40px; 
     font-size: 16px;
     cursor: pointer;
     text-transform: uppercase;
@@ -320,5 +323,6 @@ body {
 }
 .grade-neutral #reset-button:active {
     background-color: white;
-    color: #EF9241 !important; /* Цвет фона становится цветом текста при нажатии */
+    /* Устанавливаем цвет текста в цвет самого градиента (оранжевый) */
+    color: #EF9241 !important; 
 }
